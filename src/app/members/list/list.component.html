@@ -1,0 +1,36 @@
+<div class='container' style="margin-top: 10px">
+  <h3>Lista de socios</h3>
+  <div class="alert alert-{{ sociosSrv.messageType }}" *ngIf="sociosSrv.message">
+    {{ sociosSrv.message }}
+  </div>
+  <ng-template *ngIf='sociosSrv.arrayUsers.length === 0 then noRecords; else showTable'></ng-template>
+
+  <ng-template #showTable>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>DNI</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let socio of sociosSrv.arrayUsers'>
+          <th>{{ socio.id }}</th>
+          <th>{{ socio.nombre }}</th>
+          <th>{{ socio.dni }}</th>
+          <th><button type="button" class="btn btn-primary btn-sm" routerLink="/members/details" (click)='sociosSrv.editUser( socio.id )'>edit</button></th>
+          <th><button type="button" class="btn btn-primary btn-sm" (click)='sociosSrv.deleteUser( socio.id )'>delete</button></th>
+        </tr>
+      </tbody>
+    </table>
+
+  </ng-template>
+
+  <ng-template #noRecords>
+    <p>No se han encontrado registros</p>
+  </ng-template>
+</div>
